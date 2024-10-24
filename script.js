@@ -1,43 +1,40 @@
-// Store player data
-let teams = { team1: [], team2: [] };
-let currentTeam = "team1";
-let maxPlayers = 5;
+let team1 = [];
+let team2 = [];
 
-// Elements
-const formContainer = document.querySelector(".form-container");
-const teamNameInput = document.querySelector("#team-name");
-const playerNameInput = document.querySelector("#player-name");
-const joinBtn = document.querySelector("#join-btn");
-const playersContainer = document.querySelector(".players-container");
-const startBtn = document.querySelector("#start-btn");
-
-// Function to add player to the team
-joinBtn.addEventListener("click", () => {
-  const playerName = playerNameInput.value.trim();
-  if (playerName && teams[currentTeam].length < maxPlayers) {
-    teams[currentTeam].push(playerName);
-
-    // Display player in the list with "Ready!"
-    const playerElement = document.createElement("p");
-    playerElement.innerHTML = `${playerName} <span style="color: green;">Ready!</span>`;
-    playersContainer.appendChild(playerElement);
-
-    playerNameInput.value = ""; // Clear input field
+// Team 1 Registration Logic
+document.getElementById('add-team1-player').addEventListener('click', () => {
+  const playerName = document.getElementById('player1-name').value.trim();
+  if (playerName) {
+    team1.push(playerName);
+    displayPlayer('team1-players', playerName);
+    document.getElementById('player1-name').value = '';
   }
 });
 
-// Switch to the next team's registration or start the game
-startBtn.addEventListener("click", () => {
-  if (teams[currentTeam].length === 0) return; // Ensure at least one player is added
+document.getElementById('proceed-to-team2').addEventListener('click', () => {
+  document.getElementById('team1-form').classList.add('hidden');
+  document.getElementById('team2-form').classList.remove('hidden');
+});
 
-  if (currentTeam === "team1") {
-    // Move to the next team's registration
-    currentTeam = "team2";
-    teamNameInput.value = ""; // Clear team name for the second team
-    playersContainer.innerHTML = ""; // Clear player list
-  } else {
-    // Both teams registered, save data and redirect to the game page
-    localStorage.setItem("teams", JSON.stringify(teams));
-    window.location.href = "game.html"; // Redirect to game page
+// Team 2 Registration Logic
+document.getElementById('add-team2-player').addEventListener('click', () => {
+  const playerName = document.getElementById('player2-name').value.trim();
+  if (playerName) {
+    team2.push(playerName);
+    displayPlayer('team2-players', playerName);
+    document.getElementById('player2-name').value = '';
   }
 });
+
+document.getElementById('start-game').addEventListener('click', () => {
+  console.log('Game starting with:', { team1, team2 });
+  alert('Game starting!');
+});
+
+// Display Players
+function displayPlayer(containerId, playerName) {
+  const container = document.getElementById(containerId);
+  const playerItem = document.createElement('p');
+  playerItem.innerHTML = `${playerName} <span>Ready!</span>`;
+  container.appendChild(playerItem);
+}
