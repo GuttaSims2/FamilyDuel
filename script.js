@@ -23,11 +23,26 @@ const team2Score = document.getElementById("team2-score");
 
 // Add players to teams
 function addPlayer(team) {
+  const teamNameInput = document.getElementById(`team${team}-name`);
+  const playerInput = document.getElementById(`team${team}-player`);
   const playerContainer = document.getElementById(`team${team}-players`);
-  const playerInput = document.createElement("input");
-  playerInput.type = "text";
-  playerInput.placeholder = `Player ${playerContainer.children.length + 1}`;
-  playerContainer.appendChild(playerInput);
+
+  if (playerInput.value.trim() !== "") {
+    const playerName = playerInput.value.trim();
+    playerContainer.innerHTML += `<p>${playerName}</p>`;
+    
+    // Store player name in the team object
+    if (team === 1) {
+      team1.players.push(playerName);
+    } else {
+      team2.players.push(playerName);
+    }
+    
+    // Clear input for next player
+    playerInput.value = "";
+  } else {
+    alert("Please enter a player name.");
+  }
 }
 
 // Start game after team setup
@@ -35,9 +50,6 @@ document.getElementById("setup-form").addEventListener("submit", (e) => {
   e.preventDefault();
   team1.name = document.getElementById("team1-name").value;
   team2.name = document.getElementById("team2-name").value;
-
-  team1.players = Array.from(document.getElementById("team1-players").children).map(input => input.value);
-  team2.players = Array.from(document.getElementById("team2-players").children).map(input => input.value);
 
   document.getElementById("team-setup").style.display = "none";
   document.getElementById("game-section").style.display = "block";
