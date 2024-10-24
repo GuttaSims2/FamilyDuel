@@ -1,6 +1,6 @@
 body {
   background-color: #222;
-  color: #fff;
+  color: white;
   font-family: Arial, sans-serif;
   display: flex;
   align-items: center;
@@ -15,37 +15,22 @@ body {
   max-width: 600px;
 }
 
-.answers-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 20px 0;
+.team {
+  margin-bottom: 20px;
 }
 
-.answer {
-  background-color: #444;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.answer.correct {
-  background-color: #4CAF50;
-}
-
-.answer.incorrect {
-  background-color: #F44336;
-}
-
-.controls {
+.input-container, .strike-info {
   margin: 20px 0;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.controls {
+  margin-top: 20px;
 }
 
 .scoreboard {
