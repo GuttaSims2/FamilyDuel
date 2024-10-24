@@ -7,45 +7,45 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Family Duel Setup</h1>
-  </header>
+  <div id="team-registration">
+    <!-- Team 1 Registration Form -->
+    <div class="form-container" id="team1-form">
+      <h1>Register Team 1</h1>
+      <div class="custom-input">
+        <label for="team1-name">Team Name</label>
+        <input type="text" id="team1-name" class="text-input" placeholder="Enter Team 1 name">
+      </div>
 
-  <main>
-    <section class="team-setup">
-      <h2>Setup Your Team</h2>
+      <div id="team1-players" class="players-container"></div>
 
-      <article class="team-name">
-        <label for="team-name-input" class="field-label">Team Name</label>
-        <div class="custom-input">
-          <input type="text" id="team-name-input" class="text-input" placeholder="Enter team name">
-        </div>
-        <button id="set-team-name" class="primary-btn">Save Team Name</button>
-      </article>
+      <div class="custom-input">
+        <label for="player1-name">Player Name</label>
+        <input type="text" id="player1-name" class="text-input" placeholder="Enter player name">
+        <button class="primary-btn" id="add-team1-player">Join</button>
+      </div>
 
-      <article class="player-setup">
-        <h3>Add Players</h3>
-        <label for="player-name-input" class="field-label">Player Name</label>
-        <div class="custom-input">
-          <input type="text" id="player-name-input" class="text-input" placeholder="Enter player name">
-        </div>
-        <button id="add-player-btn" class="primary-btn">Join</button>
-      </article>
+      <button class="primary-btn bottom-btn" id="proceed-to-team2">Next: Register Team 2</button>
+    </div>
 
-      <section class="player-list">
-        <h3>Team Members</h3>
-        <ul id="player-list"></ul>
-      </section>
-    </section>
+    <!-- Team 2 Registration Form -->
+    <div class="form-container hidden" id="team2-form">
+      <h1>Register Team 2</h1>
+      <div class="custom-input">
+        <label for="team2-name">Team Name</label>
+        <input type="text" id="team2-name" class="text-input" placeholder="Enter Team 2 name">
+      </div>
 
-    <section class="game-controls">
-      <button id="start-game" class="primary-btn" disabled>Start Game</button>
-    </section>
-  </main>
+      <div id="team2-players" class="players-container"></div>
 
-  <footer>
-    <p>&copy; 2024 Family Duel</p>
-  </footer>
+      <div class="custom-input">
+        <label for="player2-name">Player Name</label>
+        <input type="text" id="player2-name" class="text-input" placeholder="Enter player name">
+        <button class="primary-btn" id="add-team2-player">Join</button>
+      </div>
+
+      <button class="primary-btn bottom-btn" id="start-game">Start Game</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
