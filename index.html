@@ -3,47 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Family Duel Setup</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Family Duel</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="team-registration">
-    <!-- Team 1 Registration Form -->
-    <div class="form-container" id="team1-form">
-      <h1>Register Team 1</h1>
-      <div class="custom-input">
-        <label for="team1-name">Team Name</label>
-        <input type="text" id="team1-name" class="text-input" placeholder="Enter Team 1 name">
-      </div>
+  <div id="app">
+    <div class="registration-container">
+      <h1>Register Your Team</h1>
+      <input type="text" id="team-name" placeholder="Enter Team Name" required>
+      <input type="text" id="player-name" placeholder="Enter Player Name" required>
+      <button id="join-btn">Join</button>
 
-      <div id="team1-players" class="players-container"></div>
+      <div class="players-container"></div>
 
-      <div class="custom-input">
-        <label for="player1-name">Player Name</label>
-        <input type="text" id="player1-name" class="text-input" placeholder="Enter player name">
-        <button class="primary-btn" id="add-team1-player">Join</button>
-      </div>
-
-      <button class="primary-btn bottom-btn" id="proceed-to-team2">Next: Register Team 2</button>
-    </div>
-
-    <!-- Team 2 Registration Form -->
-    <div class="form-container hidden" id="team2-form">
-      <h1>Register Team 2</h1>
-      <div class="custom-input">
-        <label for="team2-name">Team Name</label>
-        <input type="text" id="team2-name" class="text-input" placeholder="Enter Team 2 name">
-      </div>
-
-      <div id="team2-players" class="players-container"></div>
-
-      <div class="custom-input">
-        <label for="player2-name">Player Name</label>
-        <input type="text" id="player2-name" class="text-input" placeholder="Enter player name">
-        <button class="primary-btn" id="add-team2-player">Join</button>
-      </div>
-
-      <button class="primary-btn bottom-btn" id="start-game">Start Game</button>
+      <button id="start-btn">Start Game</button>
     </div>
   </div>
 
