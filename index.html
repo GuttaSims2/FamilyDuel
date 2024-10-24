@@ -7,60 +7,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="game-container">
+  <div class="container">
     <h1>Family Duel</h1>
 
-    <!-- Setup Teams Section -->
-    <div id="team-setup">
-      <h2>Register Your Families</h2>
-      <form id="setup-form">
-        <div class="team">
-          <h3>Team 1</h3>
-          <input type="text" placeholder="Family Name" id="team1-name" required>
-          <input type="text" placeholder="Player Name" id="team1-player" required>
-          <button type="button" onclick="addPlayer(1)">Join</button>
-          <div id="team1-players"></div>
-        </div>
-
-        <div class="team">
-          <h3>Team 2</h3>
-          <input type="text" placeholder="Family Name" id="team2-name" required>
-          <input type="text" placeholder="Player Name" id="team2-player" required>
-          <button type="button" onclick="addPlayer(2)">Join</button>
-          <div id="team2-players"></div>
-        </div>
-
-        <button type="submit">Start Game</button>
-      </form>
-    </div>
-
-    <!-- Game Section -->
-    <div id="game-section" style="display: none;">
-      <div class="round-info">
-        <h2>Round <span id="round-number">1</span></h2>
-        <p id="question-text">Loading question...</p>
+    <div class="teams-container">
+      <div class="team" id="team1">
+        <h2>Team 1: <span id="team1-name-display"></span></h2>
+        <div id="team1-players"></div>
+        <p>Score: <span id="team1-score">0</span></p>
       </div>
 
-      <div class="input-container">
-        <input type="text" id="answer-input" placeholder="Type your answer">
-        <button id="submit-answer">Submit</button>
-      </div>
-
-      <div class="strike-info">
-        <p>Strikes: <span id="strike-count">0</span>/3</p>
-      </div>
-
-      <div class="controls">
-        <button id="next-turn-btn">Next Player</button>
-      </div>
-
-      <div class="scoreboard">
-        <p>Team 1 Score: <span id="team1-score">0</span></p>
-        <p>Team 2 Score: <span id="team2-score">0</span></p>
+      <div class="team" id="team2">
+        <h2>Team 2: <span id="team2-name-display"></span></h2>
+        <div id="team2-players"></div>
+        <p>Score: <span id="team2-score">0</span></p>
       </div>
     </div>
+
+    <div class="game-board">
+      <div class="question-container">
+        <h2 id="question-text">Question...</h2>
+      </div>
+      <div class="answers-container" id="answers-container"></div>
+      <div class="strike" id="strike" style="display: none;">❌</div>
+    </div>
+
+    <div class="controls">
+      <input type="text" id="answer-input" placeholder="Type your answer">
+      <button id="submit-answer">Submit</button>
+    </div>
+
+    <script src="script.js"></script>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
