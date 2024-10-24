@@ -9,30 +9,68 @@ body {
   margin: 0;
 }
 
-.game-container {
+.container {
   text-align: center;
-  width: 80%;
-  max-width: 600px;
+  width: 90%;
+  max-width: 800px;
 }
 
-.team {
+.teams-container {
+  display: flex;
+  justify-content: space-around;
   margin-bottom: 20px;
 }
 
-.input-container, .strike-info {
+.team {
+  width: 45%;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.team h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.game-board {
+  background-color: #1d3557;
+  padding: 20px;
+  border-radius: 8px;
   margin: 20px 0;
 }
 
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
+.question-container h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.answers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.answers-container div {
+  background-color: #457b9d;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
 }
 
 .controls {
   margin-top: 20px;
 }
 
-.scoreboard {
-  margin-top: 10px;
+.strike {
+  font-size: 100px;
+  color: red;
+  animation: flash 0.5s ease-in-out alternate infinite;
+}
+
+@keyframes flash {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
