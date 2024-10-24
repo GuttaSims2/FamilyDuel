@@ -1,92 +1,56 @@
-const questions = [
-  { question: "Name a common pet.", answers: ["Dog", "Cat", "Fish", "Bird"] },
-  { question: "Name something you do before bed.", answers: ["Brush teeth", "Read", "Watch TV", "Set alarm"] },
-  { question: "Name a popular pizza topping.", answers: ["Pepperoni", "Cheese", "Mushrooms", "Olives"] }
-];
+let team = { name: "", players: [] };
 
-let team1 = { name: "", players: [], score: 0 };
-let team2 = { name: "", players: [], score: 0 };
-let currentTeam = 1;
-let strikes = 0;
-let currentQuestionIndex = 0;
+const teamNameInput = document.getElementById("team-name-input");
+const setTeamNameBtn = document.getElementById("set-team-name");
+const playerNameInput = document.getElementById("player-name-input");
+const addPlayerBtn = document.getElementById("add-player-btn");
+const playerList = document.getElementById("player-list");
+const startGameBtn = document.getElementById("start-game");
 
-const questionText = document.getElementById("question-text");
-const answersContainer = document.getElementById("answers-container");
-const strikeDisplay = document.getElementById("strike");
-const answerInput = document.getElementById("answer-input");
-const submitAnswerBtn = document.getElementById("submit-answer");
-
-// Display team names and players
-function displayTeamInfo() {
-  document.getElementById("team1-name-display").textContent = team1.name;
-  document.getElementById("team2-name-display").textContent = team2.name;
-  displayPlayers(1);
-  displayPlayers(2);
-}
-
-function displayPlayers(team) {
-  const playerContainer = document.getElementById(`team${team}-players`);
-  playerContainer.innerHTML = "";
-  const players = team === 1 ? team1.players : team2.players;
-  players.forEach(player => {
-    const playerElem = document.createElement("p");
-    playerElem.textContent = player;
-    playerContainer.appendChild(playerElem);
-  });
-}
-
-// Load a new question
-function loadQuestion() {
-  const question = questions[currentQuestionIndex];
-  questionText.textContent = question.question;
-  answersContainer.innerHTML = "";
-  question.answers.forEach(answer => {
-    const answerElem = document.createElement("div");
-    answerElem.textContent = answer;
-    answersContainer.appendChild(answerElem);
-  });
-}
-
-// Handle submitting an answer
-submitAnswerBtn.addEventListener("click", () => {
-  const answer = answerInput.value.trim().toLowerCase();
-  const correctAnswers = questions[currentQuestionIndex].answers.map(a => a.toLowerCase());
-
-  if (correctAnswers.includes(answer)) {
-    alert("Correct!");
-  } else {
-    handleStrike();
+// Set the team name
+setTeamNameBtn.addEventListener("click", () => {
+  const name = teamNameInput.value.trim();
+  if (name) {
+    team.name = name;
+    alert(`Team name set to: ${team.name}`);
+    teamNameInput.disabled = true;
+    setTeamNameBtn.disabled = true;
+    enableGameStart();
   }
-
-  answerInput.value = "";
 });
 
-// Handle incorrect answers
-function handleStrike() {
-  strikes++;
-  strikeDisplay.style.display = "block";
+// Add a player to the team
+addPlayerBtn.addEventListener("click", () => {
+  const playerName = playerNameInput.value.trim();
+  if (playerName && team.players.length < 5) {
+    team.players.push(playerName);
+    updatePlayerList();
+    playerNameInput.value = "";
+    enableGameStart();
+  } else if (team.players.length >= 5) {
+    alert("Maximum of 5 players reached.");
+  }
+});
 
-  setTimeout(() => {
-    strikeDisplay.style.display = "none";
-  }, 1000);
+// Update the player list display
+function updatePlayerList() {
+  playerList.innerHTML = "";
+  team.players.forEach((player) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `${player} <span>Ready!</span>`;
+    playerList.appendChild(listItem);
+  });
+}
 
-  if (strikes >= 3) {
-    alert("Three strikes! Switching teams.");
-    strikes = 0;
-    currentTeam = currentTeam === 1 ? 2 : 1;
+// Enable the Start Game button if all conditions are met
+function enableGameStart() {
+  if (team.name && team.players.length >= 3) {
+    startGameBtn.disabled = false;
   }
 }
 
-// Start the game
-function startGame(team1Name, team1Players, team2Name, team2Players) {
-  team1.name = team1Name;
-  team1.players = team1Players;
-  team2.name = team2Name;
-  team2.players = team2Players;
-
-  displayTeamInfo();
-  loadQuestion();
-}
-
-// Example game start (you can replace this with actual user input logic)
-startGame("The Smiths", ["Alice", "Bob"], "The Johnsons", ["Eve", "Charlie"]);
+// Example of starting the game
+startGameBtn.addEventListener("click", () => {
+  alert(`Starting game for Team ${team.name} with players: ${team.players.join(", ")}`);
+  // Proceed to the next part of your game logic...
+});
