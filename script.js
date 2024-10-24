@@ -1,102 +1,92 @@
 const questions = [
   { question: "Name a common pet.", answers: ["Dog", "Cat", "Fish", "Bird"] },
   { question: "Name something you do before bed.", answers: ["Brush teeth", "Read", "Watch TV", "Set alarm"] },
-  { question: "Name a popular pizza topping.", answers: ["Pepperoni", "Cheese", "Mushrooms", "Olives"] },
-  { question: "Name a holiday people decorate for.", answers: ["Christmas", "Halloween", "Easter", "Thanksgiving"] }
+  { question: "Name a popular pizza topping.", answers: ["Pepperoni", "Cheese", "Mushrooms", "Olives"] }
 ];
 
 let team1 = { name: "", players: [], score: 0 };
 let team2 = { name: "", players: [], score: 0 };
 let currentTeam = 1;
-let currentPlayer = 0;
-let currentRound = 0;
 let strikes = 0;
+let currentQuestionIndex = 0;
 
 const questionText = document.getElementById("question-text");
+const answersContainer = document.getElementById("answers-container");
+const strikeDisplay = document.getElementById("strike");
 const answerInput = document.getElementById("answer-input");
 const submitAnswerBtn = document.getElementById("submit-answer");
-const strikeCount = document.getElementById("strike-count");
-const nextTurnBtn = document.getElementById("next-turn-btn");
-const roundNumber = document.getElementById("round-number");
-const team1Score = document.getElementById("team1-score");
-const team2Score = document.getElementById("team2-score");
 
-// Add players to teams
-function addPlayer(team) {
-  const teamNameInput = document.getElementById(`team${team}-name`);
-  const playerInput = document.getElementById(`team${team}-player`);
+// Display team names and players
+function displayTeamInfo() {
+  document.getElementById("team1-name-display").textContent = team1.name;
+  document.getElementById("team2-name-display").textContent = team2.name;
+  displayPlayers(1);
+  displayPlayers(2);
+}
+
+function displayPlayers(team) {
   const playerContainer = document.getElementById(`team${team}-players`);
-
-  if (playerInput.value.trim() !== "") {
-    const playerName = playerInput.value.trim();
-    playerContainer.innerHTML += `<p>${playerName}</p>`;
-    
-    // Store player name in the team object
-    if (team === 1) {
-      team1.players.push(playerName);
-    } else {
-      team2.players.push(playerName);
-    }
-    
-    // Clear input for next player
-    playerInput.value = "";
-  } else {
-    alert("Please enter a player name.");
-  }
+  playerContainer.innerHTML = "";
+  const players = team === 1 ? team1.players : team2.players;
+  players.forEach(player => {
+    const playerElem = document.createElement("p");
+    playerElem.textContent = player;
+    playerContainer.appendChild(playerElem);
+  });
 }
 
-// Start game after team setup
-document.getElementById("setup-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  team1.name = document.getElementById("team1-name").value;
-  team2.name = document.getElementById("team2-name").value;
-
-  document.getElementById("team-setup").style.display = "none";
-  document.getElementById("game-section").style.display = "block";
-
-  loadRound();
-});
-
-function loadRound() {
-  const round = questions[currentRound];
-  questionText.textContent = round.question;
-  answerInput.value = "";
-  strikes = 0;
-  strikeCount.textContent = strikes;
+// Load a new question
+function loadQuestion() {
+  const question = questions[currentQuestionIndex];
+  questionText.textContent = question.question;
+  answersContainer.innerHTML = "";
+  question.answers.forEach(answer => {
+    const answerElem = document.createElement("div");
+    answerElem.textContent = answer;
+    answersContainer.appendChild(answerElem);
+  });
 }
 
+// Handle submitting an answer
 submitAnswerBtn.addEventListener("click", () => {
   const answer = answerInput.value.trim().toLowerCase();
-  const correctAnswers = questions[currentRound].answers.map(a => a.toLowerCase());
+  const correctAnswers = questions[currentQuestionIndex].answers.map(a => a.toLowerCase());
 
   if (correctAnswers.includes(answer)) {
-    updateScore();
+    alert("Correct!");
   } else {
-    strikes++;
-    strikeCount.textContent = strikes;
-    if (strikes >= 3) nextPlayer();
+    handleStrike();
   }
+
+  answerInput.value = "";
 });
 
-function updateScore() {
-  const team = currentTeam === 1 ? team1 : team2;
-  team.score += 10;
-  (currentTeam === 1 ? team1Score : team2Score).textContent = team.score;
-  nextPlayer();
-}
+// Handle incorrect answers
+function handleStrike() {
+  strikes++;
+  strikeDisplay.style.display = "block";
 
-function nextPlayer() {
-  currentPlayer = (currentPlayer + 1) % team1.players.length;
-  if (currentPlayer === 0) currentTeam = currentTeam === 1 ? 2 : 1;
-  if (currentPlayer === 0 && currentTeam === 1) nextRound();
-}
+  setTimeout(() => {
+    strikeDisplay.style.display = "none";
+  }, 1000);
 
-function nextRound() {
-  currentRound++;
-  if (currentRound < questions.length) {
-    roundNumber.textContent = currentRound + 1;
-    loadRound();
-  } else {
-    questionText.textContent = "Game Over!";
+  if (strikes >= 3) {
+    alert("Three strikes! Switching teams.");
+    strikes = 0;
+    currentTeam = currentTeam === 1 ? 2 : 1;
   }
 }
+
+// Start the game
+function startGame(team1Name, team1Players, team2Name, team2Players) {
+  team1.name = team1Name;
+  team1.players = team1Players;
+  team2.name = team2Name;
+  team2.players = team2Players;
+
+  displayTeamInfo();
+  loadQuestion();
+}
+
+// Example game start (you can replace this with actual user input logic)
+startGame("The Smiths", ["Alice", "Bob"], "The Johnsons", ["Eve", "Charlie"]);
