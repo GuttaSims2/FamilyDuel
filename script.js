@@ -1,54 +1,43 @@
-let teams = JSON.parse(localStorage.getItem("teams")) || { team1: [], team2: [] };
+// Store player data
+let teams = { team1: [], team2: [] };
 let currentTeam = "team1";
-let team1Score = 0;
-let team2Score = 0;
+let maxPlayers = 5;
 
-const team1Players = document.getElementById("team1-players");
-const team2Players = document.getElementById("team2-players");
-const question = document.getElementById("question");
-const answers = document.querySelectorAll("#answers li");
-const answerInput = document.getElementById("answer-input");
-const submitAnswer = document.getElementById("submit-answer");
-const feedback = document.getElementById("feedback");
-const team1ScoreElement = document.getElementById("team1-score");
-const team2ScoreElement = document.getElementById("team2-score");
+// Elements
+const formContainer = document.querySelector(".form-container");
+const teamNameInput = document.querySelector("#team-name");
+const playerNameInput = document.querySelector("#player-name");
+const joinBtn = document.querySelector("#join-btn");
+const playersContainer = document.querySelector(".players-container");
+const startBtn = document.querySelector("#start-btn");
 
-// Display team members
-teams.team1.forEach(player => {
-  let li = document.createElement("li");
-  li.textContent = player;
-  team1Players.appendChild(li);
+// Function to add player to the team
+joinBtn.addEventListener("click", () => {
+  const playerName = playerNameInput.value.trim();
+  if (playerName && teams[currentTeam].length < maxPlayers) {
+    teams[currentTeam].push(playerName);
+
+    // Display player in the list with "Ready!"
+    const playerElement = document.createElement("p");
+    playerElement.innerHTML = `${playerName} <span style="color: green;">Ready!</span>`;
+    playersContainer.appendChild(playerElement);
+
+    playerNameInput.value = ""; // Clear input field
+  }
 });
 
-teams.team2.forEach(player => {
-  let li = document.createElement("li");
-  li.textContent = player;
-  team2Players.appendChild(li);
-});
+// Switch to the next team's registration or start the game
+startBtn.addEventListener("click", () => {
+  if (teams[currentTeam].length === 0) return; // Ensure at least one player is added
 
-// Handle answer submission
-submitAnswer.addEventListener("click", () => {
-  const userAnswer = answerInput.value.trim().toLowerCase();
-  let correct = false;
-
-  answers.forEach(answer => {
-    if (answer.textContent.toLowerCase().includes(userAnswer)) {
-      answer.classList.remove("hidden");
-      correct = true;
-
-      if (currentTeam === "team1") {
-        team1Score += parseInt(answer.textContent.split("-")[1].trim());
-        team1ScoreElement.textContent = team1Score;
-      } else {
-        team2Score += parseInt(answer.textContent.split("-")[1].trim());
-        team2ScoreElement.textContent = team2Score;
-      }
-    }
-  });
-
-  feedback.textContent = correct ? "Correct!" : "Wrong answer!";
-  answerInput.value = "";
-
-  // Switch teams after each turn
-  currentTeam = currentTeam === "team1" ? "team2" : "team1";
+  if (currentTeam === "team1") {
+    // Move to the next team's registration
+    currentTeam = "team2";
+    teamNameInput.value = ""; // Clear team name for the second team
+    playersContainer.innerHTML = ""; // Clear player list
+  } else {
+    // Both teams registered, save data and redirect to the game page
+    localStorage.setItem("teams", JSON.stringify(teams));
+    window.location.href = "game.html"; // Redirect to game page
+  }
 });
