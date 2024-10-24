@@ -3,41 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Family Duel</title>
+  <title>Family Duel Setup</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Family Duel</h1>
+  <header>
+    <h1>Family Duel Setup</h1>
+  </header>
 
-    <div class="teams-container">
-      <div class="team" id="team1">
-        <h2>Team 1: <span id="team1-name-display"></span></h2>
-        <div id="team1-players"></div>
-        <p>Score: <span id="team1-score">0</span></p>
-      </div>
+  <main>
+    <section class="team-setup">
+      <h2>Setup Your Team</h2>
 
-      <div class="team" id="team2">
-        <h2>Team 2: <span id="team2-name-display"></span></h2>
-        <div id="team2-players"></div>
-        <p>Score: <span id="team2-score">0</span></p>
-      </div>
-    </div>
+      <article class="team-name">
+        <label for="team-name-input">Enter Team Name:</label>
+        <input type="text" id="team-name-input" placeholder="e.g., The Champions">
+        <button id="set-team-name">Save Team Name</button>
+      </article>
 
-    <div class="game-board">
-      <div class="question-container">
-        <h2 id="question-text">Question...</h2>
-      </div>
-      <div class="answers-container" id="answers-container"></div>
-      <div class="strike" id="strike" style="display: none;">❌</div>
-    </div>
+      <article class="player-setup">
+        <h3>Add Players</h3>
+        <label for="player-name-input">Enter Player Name:</label>
+        <input type="text" id="player-name-input" placeholder="e.g., John Doe">
+        <button id="add-player-btn">Join</button>
+      </article>
 
-    <div class="controls">
-      <input type="text" id="answer-input" placeholder="Type your answer">
-      <button id="submit-answer">Submit</button>
-    </div>
+      <section class="player-list">
+        <h3>Team Members</h3>
+        <ul id="player-list"></ul>
+      </section>
+    </section>
 
-    <script src="script.js"></script>
-  </div>
+    <section class="game-controls">
+      <button id="start-game" disabled>Start Game</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Family Duel</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
