@@ -17,15 +17,17 @@
         <div class="team">
           <h3>Team 1</h3>
           <input type="text" placeholder="Family Name" id="team1-name" required>
+          <input type="text" placeholder="Player Name" id="team1-player" required>
+          <button type="button" onclick="addPlayer(1)">Join</button>
           <div id="team1-players"></div>
-          <button type="button" onclick="addPlayer(1)">Add Player</button>
         </div>
 
         <div class="team">
           <h3>Team 2</h3>
           <input type="text" placeholder="Family Name" id="team2-name" required>
+          <input type="text" placeholder="Player Name" id="team2-player" required>
+          <button type="button" onclick="addPlayer(2)">Join</button>
           <div id="team2-players"></div>
-          <button type="button" onclick="addPlayer(2)">Add Player</button>
         </div>
 
         <button type="submit">Start Game</button>
