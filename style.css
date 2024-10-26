@@ -1,176 +1,139 @@
-/* Global Styles */
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Body Styling */
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  color: #fff;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff, #e8e8e8);
+  color: #333;
 }
 
 /* App Container */
 #app {
-  width: 95%;
-  max-width: 800px;
-  margin: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
   text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
-/* Card-like Containers */
-.registration-container, .game-container {
-  background-color: #2b2d42;
-  border-radius: 15px;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.5);
-  padding: 30px 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Title and Text */
+h1 {
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
-/* Hover effect for the containers */
-.registration-container:hover, .game-container:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.6);
+p {
+  margin-bottom: 20px;
+  font-weight: 300;
+  color: #7f8c8d;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
 }
 
 .hidden {
   display: none;
 }
 
-/* Input Fields */
-input {
-  width: 90%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #8d99ae;
-  border-radius: 10px;
-  background-color: #2a2d39;
-  color: white;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+/* Player List */
+#player-list div {
+  background-color: #ecf0f1;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 6px;
+  color: #2ecc71;
 }
 
-/* Focus effect on input fields */
-input:focus {
-  border-color: #ef233c;
-}
-
-/* Buttons */
-button {
-  width: 90%;
-  padding: 15px;
-  margin: 10px 0;
-  background-color: #ef233c;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Button hover effect */
-button:hover {
-  background-color: #d90429;
-  transform: scale(1.05);
-}
-
-/* Answers Section */
-.answers {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.answer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #8d99ae;
-  padding: 15px;
-  border-radius: 10px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  font-size: 18px;
-  color: #2b2d42;
-}
-
-.answer.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Controls and Scoreboard */
-.controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
+/* Game Container Styling */
+.game-container {
+  text-align: center;
 }
 
 .scoreboard {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-}
-
-.team-score {
-  background-color: #3a3b58;
-  padding: 15px;
-  border-radius: 10px;
-  flex: 1;
-  margin: 0 10px;
+  margin-bottom: 20px;
 }
 
 .team-score h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 5px;
 }
 
 .team-score p {
-  font-size: 18px;
+  font-size: 1rem;
+  color: #7f8c8d;
 }
 
-/* Round and End Game Elements */
-#round-number {
-  font-size: 24px;
-  font-weight: 600;
+.answers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.answer {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f1c40f;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls button {
+  margin-top: 10px;
 }
 
 #end-game-screen {
-  margin-top: 30px;
-}
-
-#final-score {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .controls {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .scoreboard {
-    flex-direction: column;
-  }
-
-  .team-score {
-    margin: 10px 0;
-  }
-
-  button {
-    width: 100%;
-  }
+  margin-top: 20px;
 }
